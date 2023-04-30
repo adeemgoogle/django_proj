@@ -34,7 +34,8 @@ urlpatterns = [
     path('api/v2/', include(router.urls)),
     path('api/v3/', include(router.urls)),
     path('api/v4/', include(router.urls)),
-    path('api/v5/signup', SignUpView.as_view())
+    path('api/v5/signup', SignUpView.as_view()),
+    path('api/v6/login', LoginView.as_view())
 
     ##  path('main/', include('main_spotify.urls', namespace='main'))
     # path('api/v1/artists/', ArtistViewSet.as_view({'get':'list'})),

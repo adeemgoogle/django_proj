@@ -47,14 +47,17 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'NON_FIELDS_ERRORS_KEY': "errors",
-    "DEFAULT_AUTHENTICATION_CLASS": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
 
-    )
+        'rest_framework.permissions.IsAdminUser'
+    ],
+    'NON_FIELD_ERRORS_KEY': "errors",
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
+
+    ),
 }
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
