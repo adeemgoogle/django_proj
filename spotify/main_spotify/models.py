@@ -39,7 +39,7 @@ class Track(models.Model):
     def __str__(self):
         return self.title
 
-
+# get sort
 class Genre(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -47,7 +47,7 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-
+## update delete
 class Playlist(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -66,7 +66,7 @@ class Like(models.Model):
     def __str__(self):
         return self.user
 
-
+## get
 class ListeningHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     track = models.ForeignKey(Track, on_delete=models.CASCADE)

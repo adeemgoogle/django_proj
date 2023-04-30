@@ -40,13 +40,21 @@ INSTALLED_APPS = [
     'main_spotify',
     'rest_framework',
     'guardian',
+    'rest_framework.authtoken',
+
 
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'NON_FIELDS_ERRORS_KEY': "errors",
+    "DEFAULT_AUTHENTICATION_CLASS": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
 
-    ]
+    )
 }
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

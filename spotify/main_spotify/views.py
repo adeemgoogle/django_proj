@@ -1,16 +1,13 @@
 from django.shortcuts import render
 
 from rest_framework.permissions import IsAdminUser
-from rest_framework import generics
+from rest_framework import generics, status
 # Create your views here.
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 
-from .models import Artist
-from .models import Album
-from .models import Track
-from .Serializers import AlbumSerializer
-from .Serializers import ArtistSerializer
 from .Serializers import *
 
 from rest_framework import viewsets
@@ -20,8 +17,6 @@ class ArtistViewSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
 
-
-#
 # ## Album api
 
 class AlbumViewSet(viewsets.ModelViewSet):
@@ -50,3 +45,29 @@ class PlaylistViewSet(viewsets.ModelViewSet):
 #         serializer.save()
 #
 #         return Response({'post': serializer.data})
+class SignUpView(generics.GenericAPIView):
+    serializer_class = SignUpSerializer
+
+    def post(self, request=Request):
+        data = request.data
+        serializer = self.serializer_class(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+            response={
+                "message": "User created, good job",
+                "data" : serializer.data
+            }
+            return Response(data=response, status=status.HTTP_201_CREATED)
+
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
+
+
+
+
